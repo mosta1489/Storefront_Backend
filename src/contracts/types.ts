@@ -1,7 +1,8 @@
 export interface User {
   id: string;
-  firstName: string;
-  lastName: string;
+  username: string;
+  firstname: string;
+  lastname: string;
   password: string;
 }
 export interface Product {

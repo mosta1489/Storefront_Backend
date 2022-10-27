@@ -1,3 +1,5 @@
 import DB from "../connection";
 import { Product } from "../contracts/types";
-export class ProductModel {}
+class ProductModelDB {}
+
+export const ProductModel = new ProductModelDB();

@@ -2,13 +2,22 @@ import { Pool } from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 
-const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
-console.log({ DB_HOST, DB_NAME, DB_USER, DB_PASSWORD });
-let DB;
+const { DB_HOST, DB_NAME, TEST_DB_NAME, DB_USER, DB_PASSWORD, ENV } =
+  process.env;
+
+let databaseName = DB_NAME;
+
+if (ENV == "test") {
+  databaseName = TEST_DB_NAME;
+}
+
+console.log("ENV >>> ", ENV);
+
+let DB: Pool;
 try {
   DB = new Pool({
     host: DB_HOST,
-    database: DB_NAME,
+    database: databaseName,
     user: DB_USER,
     password: DB_PASSWORD,
   });

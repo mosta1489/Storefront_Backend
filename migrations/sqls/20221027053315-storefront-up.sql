@@ -1,7 +1,8 @@
 CREATE TABLE users (
     id VARCHAR(150) PRIMARY KEY,
-    firstName VARCHAR(150),
-    lastName VARCHAR(150),
+    username VARCHAR(150) UNIQUE,
+    firstname VARCHAR(150),
+    lastname VARCHAR(150),
     password VARCHAR(150)
 );
 
