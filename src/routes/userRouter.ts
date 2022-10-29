@@ -1,24 +1,26 @@
 import { Router, Request, Response } from "express";
-// import asyncHandler from "express-async-handler";
+import asyncHandler from "express-async-handler";
+import { authMiddleware, isAdmin, isSameUser } from "../middlewares";
 
+import {
+  signUpHandler,
+  signinHandler,
+  deleteUserHandler,
+  getAllUsers,
+  makeAdmin,
+} from "./../handlers/userHandler";
 const userRouter = Router();
 
-// portected (admin only)
-userRouter.get("/", (req: Request, res: Response) => {
-  res.send("show all users IDs");
-});
+userRouter.post("/signup", asyncHandler(signUpHandler));
 
-// portected (admin only)
-userRouter.get("/:id", (req: Request, res: Response) => {
-  res.send("show user data");
-});
+userRouter.post("/signin", asyncHandler(signinHandler));
 
-userRouter.post("/signup", (req: Request, res: Response) => {
-  res.send("create user");
-});
+userRouter.use(authMiddleware);
 
-userRouter.get("/signin", (req: Request, res: Response) => {
-  res.send("sign in");
-});
+userRouter.get("/all", isAdmin, asyncHandler(getAllUsers));
+
+userRouter.delete("/:id", isSameUser, asyncHandler(deleteUserHandler));
+
+userRouter.post("/admin", asyncHandler(makeAdmin));
 
 export default userRouter;

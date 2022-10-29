@@ -7,11 +7,9 @@ const { DB_HOST, DB_NAME, TEST_DB_NAME, DB_USER, DB_PASSWORD, ENV } =
 
 let databaseName = DB_NAME;
 
-if (ENV == "test") {
+if (ENV !== "dev") {
   databaseName = TEST_DB_NAME;
 }
-
-console.log("ENV >>> ", ENV);
 
 let DB: Pool;
 try {

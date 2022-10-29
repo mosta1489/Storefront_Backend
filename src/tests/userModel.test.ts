@@ -1,6 +1,6 @@
 import "jasmine";
-import { UserModel } from "../../models";
-import { User } from "../../contracts/types";
+import { UserModel } from "../models";
+import { User } from "../contracts/types";
 
 type withoutPassword = Pick<User, "id" | "username" | "firstname" | "lastname">;
 
@@ -25,12 +25,14 @@ describe("User model tests \n", () => {
   });
 
   it("should be return user data", async () => {
-    const data = await UserModel.getUserById("id_1");
+    const data = await UserModel.getUserByUserName("mosta1489");
     expect(data).toEqual({
       id: "id_1",
       username: "mosta1489",
       firstname: "mostafa",
       lastname: "ahmed",
+      password: "aklsgjlkasdjglkjaesli",
+      isadmin: false,
     });
   });
 

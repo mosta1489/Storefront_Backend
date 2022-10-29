@@ -1,3 +1,5 @@
+import { RequestHandler } from "express";
+
 export interface User {
   id: string;
   username: string;
@@ -17,4 +19,16 @@ export interface Order {
   user_id: string;
   quantity: number;
   status: string;
+}
+
+type withError<T> = T & { error: string };
+export type expressHandler<Params, Req, Res> = RequestHandler<
+  Partial<Params>,
+  Partial<withError<Res>>,
+  Partial<Req>
+>;
+
+export interface JwtPayload {
+  userId: string;
+  isAdmin: boolean;
 }

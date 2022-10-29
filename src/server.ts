@@ -23,7 +23,7 @@ app.use(errHanler);
 app.use(notFound);
 
 app.listen(port, function () {
-  console.log(`starting app on: ${port}`);
+  console.log(` \n\t\t✌️\t\n\n server listeing on port: ${port}`);
 });
 
 export default app;
