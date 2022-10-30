@@ -1,54 +1,63 @@
 # Storefront Backend Project
 
-## Getting Started
+#### install all dependencies
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+    npm i
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+#### to run test script
 
-## Steps to Completion
+    npm run test
 
-### 1. Plan to Meet Requirements
+#### to run the server
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+    npm start
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+#### server is running at
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+    localhost:3000
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+## users endpoints
 
-### 2.  DB Creation and Migrations
+#### user can be create account & sign in & delete user
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+    (post) localhost:3000/user/signup
+    (post) localhost:3000/user/signin
+    (delete) localhost:3000/user/:id  <userToken required>
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+#### admin can be show all users
 
-### 3. Models
+    (get) localhost:3000/user/all <adminToken required>
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+#### to make normal user as admin
 
-### 4. Express Handlers
+    (post) localhost:3000/user/admin <userToken required>
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+## products endpoints
 
-### 5. JWTs
+#### admin can be create new product
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+    (post) localhost:3000/product/ <adminToken required>
 
-### 6. QA and `README.md`
+#### user can be show all product & show one product by id
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
+    (get) localhost:3000/product/
+    (get) localhost:3000/product/:id
 
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+## orders endpoints
+
+#### user can be create a new order & show his orders & delete an order
+
+    (post) localhost:3000/oreder/ <userToken required>
+    (get) localhost:3000/oreder/  <userToken required>
+    (delete) localhost:3000/oreder/:id  <userToken required>
+
+#### admin can be show all orders & update status of order to complete
+
+    (put) localhost:3000/oreder/:id <adminToken required>
+    (get) localhost:3000/oreder/all <adminToken required>
+
+#
+
+# https://documenter.getpostman.com/view/18849836/2s8YRcPGhm
+
+## show this Postman API documentation to know all about requests and response shapes

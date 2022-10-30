@@ -3,10 +3,11 @@ import bodyParser from "body-parser";
 import { requestLoggerMiddleware, errHanler, notFound } from "./middlewares";
 import { userRouter, orderRouter, productRouter } from "./routes";
 import { accessEnv } from "./helpers";
-
+import cors from "cors";
 const app: express.Application = express();
 const port: string = accessEnv("PORT");
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(requestLoggerMiddleware);

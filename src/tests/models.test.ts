@@ -1,14 +1,14 @@
 import "jasmine";
-import { UserModel } from "../models";
-import { User } from "../contracts/types";
+import { UserModel, ProductModel, OrderModel } from "../models";
+import { User, Product, Order, OrderWithStatus } from "../contracts/types";
 
 type withoutPassword = Pick<User, "id" | "username" | "firstname" | "lastname">;
 
 describe("User model tests \n", () => {
   //
-  it("should be create user ", async () => {
+  it("Create new user ", async () => {
     const user = {
-      id: "id_1",
+      id: "user_id_1",
       username: "mosta1489",
       firstname: "mostafa",
       lastname: "ahmed",
@@ -19,15 +19,15 @@ describe("User model tests \n", () => {
     });
   });
 
-  it("should be return not empty list", async () => {
+  it("Return not empty list", async () => {
     const data = await UserModel.getAllUsers();
     expect(data.length).toBeGreaterThan(0);
   });
 
-  it("should be return user data", async () => {
+  it("Return user data", async () => {
     const data = await UserModel.getUserByUserName("mosta1489");
     expect(data).toEqual({
-      id: "id_1",
+      id: "user_id_1",
       username: "mosta1489",
       firstname: "mostafa",
       lastname: "ahmed",
@@ -35,10 +35,94 @@ describe("User model tests \n", () => {
       isadmin: false,
     });
   });
+});
 
-  it("should be delete user ", async () => {
-    await UserModel.deleteUser("id_1").catch((error) => {
+describe("Product model tests \n", () => {
+  it("Create new product", async () => {
+    const product: Product = {
+      id: "product_id_1",
+      name: "product_test",
+      price: 555,
+    };
+    await ProductModel.createProduct(product).catch((err) => {
+      console.log(err);
+    });
+  });
+
+  it("Get all product as a not empty list of products", async () => {
+    const products: Product[] = await ProductModel.getAllProducts();
+    expect(products.length).toBeGreaterThan(0);
+  });
+
+  it("show one product return correct product data", async () => {
+    const product: Product = await ProductModel.showProduct("product_id_1");
+    expect(product).toEqual({
+      id: "product_id_1",
+      name: "product_test",
+      price: 555,
+    });
+  });
+});
+
+describe("Order model tests \n", () => {
+  it("Create new order to user", async () => {
+    const order: Order = {
+      id: "order_id_1",
+      product_id: "product_id_1",
+      user_id: "user_id_1",
+      quantity: 50,
+    };
+    await OrderModel.createOrder(order).catch((err) => {
+      console.log(err);
+    });
+  });
+
+  it("Get all oreder as a not empty list of Orders ", async () => {
+    const orders: OrderWithStatus[] = await OrderModel.getAllOrders();
+    expect(orders.length).toBeGreaterThan(0);
+  });
+
+  it("Get user orders return correct orders data", async () => {
+    const orders: OrderWithStatus[] = await OrderModel.getUserOrders(
+      "user_id_1"
+    );
+    expect(orders[0]).toEqual({
+      id: "order_id_1",
+      product_id: "product_id_1",
+      user_id: "user_id_1",
+      quantity: 50,
+      status: "active",
+    });
+  });
+
+  it("Make status of order to be complete ", async () => {
+    await OrderModel.updateOrderStatus("order_id_1").catch((err) => {
+      console.log(err);
+    });
+  });
+
+  it("Get user order after updated should be completed", async () => {
+    const orders: OrderWithStatus[] = await OrderModel.getUserOrders(
+      "user_id_1"
+    );
+    expect(orders[0]).toEqual({
+      id: "order_id_1",
+      product_id: "product_id_1",
+      user_id: "user_id_1",
+      quantity: 50,
+      status: "complete",
+    });
+  });
+
+  it(" Delete an order ", async () => {
+    await OrderModel.deleteOrder("order_id").catch((error) => {
       console.log(error);
     });
+  });
+});
+
+it("Finally delete user ", async () => {
+  await UserModel.deleteUser("user_id_1").catch((error) => {
+    console.log(error);
   });
 });

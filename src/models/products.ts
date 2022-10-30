@@ -10,6 +10,7 @@ class ProductModelDB {
       return Promise.reject(error);
     }
   }
+
   async showProduct(product_id: string): Promise<Product> {
     const query = `SELECT * FROM products WHERE id=$1`;
     try {

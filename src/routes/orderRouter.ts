@@ -15,10 +15,8 @@ orderRouter.use(authMiddleware);
 // protected (user)
 orderRouter.get("/", asyncHandler(getUserOrdersHandler));
 
-// protected (user)
 orderRouter.post("/", asyncHandler(createOrderHandler));
 
-// protected (user)
 orderRouter.delete("/:id", asyncHandler(deleteOrderHandler));
 
 orderRouter.use(isAdmin);
