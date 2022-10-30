@@ -1,18 +1,17 @@
 import { Router, Request, Response } from "express";
-// import asyncHandler from "express-async-handler";
-
+import asyncHandler from "express-async-handler";
+import {
+  getProductsHandler,
+  showProductHandler,
+  createProductHandler,
+} from "../handlers/productHandler";
+import { authMiddleware, isAdmin } from "../middlewares";
 const productRouter = Router();
 
-productRouter.get("/", (req: Request, res: Response) => {
-  res.send("index product");
-});
+productRouter.get("/", asyncHandler(getProductsHandler));
 
-productRouter.get("/:id", (req: Request, res: Response) => {
-  res.send("show one product");
-});
+productRouter.get("/:id", asyncHandler(showProductHandler));
 
-// protected
-productRouter.post("/", (req: Request, res: Response) => {
-  res.send("create product");
-});
+productRouter.use(authMiddleware, isAdmin);
+productRouter.post("/", asyncHandler(createProductHandler));
 export default productRouter;

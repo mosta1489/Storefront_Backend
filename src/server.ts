@@ -16,8 +16,8 @@ app.get("/", function (req: Request, res: Response) {
 });
 
 app.use("/user", userRouter);
-app.use("/order", orderRouter);
 app.use("/product", productRouter);
+app.use("/order", orderRouter);
 
 app.use(errHanler);
 app.use(notFound);

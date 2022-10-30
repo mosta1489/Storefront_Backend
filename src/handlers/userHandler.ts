@@ -19,7 +19,6 @@ import {
 } from "../helpers";
 
 import crypto from "crypto";
-const generateUUID: string = crypto.randomUUID();
 
 export const signUpHandler: expressHandler<
   never,
@@ -39,7 +38,7 @@ export const signUpHandler: expressHandler<
   const hashedPassword = await hashPassword(password);
 
   const user: User = {
-    id: generateUUID,
+    id: crypto.randomUUID(),
     username: username,
     firstname: firstname,
     lastname: lastname,
