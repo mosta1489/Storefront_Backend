@@ -4,6 +4,10 @@
 
     npm i
 
+#### to build database schema
+
+    npm run migrate
+
 #### to run test script
 
     npm run test
@@ -61,3 +65,17 @@
 # https://documenter.getpostman.com/view/18849836/2s8YRcPGhm
 
 ## show this Postman API documentation to know all about requests and response shapes
+
+
+
+#### this is the environment variables to test the project
+    DB_HOST=localhost
+    DB_NAME=storefront
+    TEST_DB_NAME=storefront_test
+    DB_USER=postgres
+    DB_PASSWORD=postgres
+    JWT_SECRET= ajksgfjaslkgjlaijglajweogijoiejwo
+    PORT=3000
+    ENV=dev
+    ADMIN_SECRET=SECRET_PASSWORD
+    SALT_ROUND=10
