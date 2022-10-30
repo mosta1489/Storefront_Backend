@@ -58,15 +58,17 @@ export const signinHandler: expressHandler<
   const { username, password } = req.body;
 
   if (!username || !password) {
-    res.status(400).send({ error: "username and password are required" });
+    return res
+      .status(400)
+      .send({ error: "username and password are required" });
   }
   const user = await UserModel.getUserByUserName(username);
   if (!user) {
-    res.status(400).send({ error: "Incorrect username or password" });
+    return res.status(400).send({ error: "Incorrect username or password" });
   }
   const isMatch = await comparePassword(password, user.password);
   if (!isMatch) {
-    res.status(400).send({ error: "Incorrect username or password" });
+    return res.status(400).send({ error: "Incorrect username or password" });
   }
   const jwt = createToken({ userId: user.id, isAdmin: user.isadmin });
   const { id, firstname, lastname } = user;

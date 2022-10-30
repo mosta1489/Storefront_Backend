@@ -1,4 +1,4 @@
-import { User, Product } from "./types";
+import { User, Product, Order, OrderWithStatus } from "./types";
 
 // ===================================================
 // user API
@@ -43,10 +43,14 @@ export interface MakeAdminResponse {
 
 // Product API
 
+// -----------------------------------------
+
 export interface GetAllProductsReqest {}
 export interface GetAllProductsResponse {
   products: Product[];
 }
+
+// -----------------------------------------
 
 export interface ShowProductRequest {}
 export interface ShowProductParams {
@@ -56,9 +60,57 @@ export interface ShowProductResponse {
   product: Product;
 }
 
+// -----------------------------------------
+
 export type CreteProductRequest = Pick<Product, "name" | "price">;
 export interface CreteProductResponse {
   message: string;
 }
 
+// -----------------------------------------
+
 // ===================================================
+// order API
+
+// -----------------------------------------
+
+export interface GetUserOrdersRequest {}
+export interface GetUserOrdersResponse {
+  orders: OrderWithStatus[];
+}
+
+// -----------------------------------------
+
+export type CreateOrderRequest = Pick<Order, "product_id" | "quantity">;
+export interface CreateOrderResponse {
+  message: string;
+}
+
+// -----------------------------------------
+
+export interface DeleteOrderRequest {}
+export interface DeleteOrderParams {
+  id: string;
+}
+export interface DeleteOrderResponse {
+  message: string;
+}
+
+// -----------------------------------------
+
+export interface GetAllOrdersRequest {}
+export interface GetAllOrdersResponse {
+  orders: OrderWithStatus[];
+}
+
+// -----------------------------------------
+
+export interface UpdateOrderRequest {}
+export interface UpdateOrderParams {
+  id: string;
+}
+export interface UpdateOrderResponse {
+  message: string;
+}
+
+// -----------------------------------------

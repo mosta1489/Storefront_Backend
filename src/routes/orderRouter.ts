@@ -1,26 +1,31 @@
 import { Router, Request, Response } from "express";
-// import asyncHandler from "express-async-handler";
+import { authMiddleware, isAdmin } from "../middlewares";
+import asyncHandler from "express-async-handler";
+import {
+  getUserOrdersHandler,
+  createOrderHandler,
+  deleteOrderHandler,
+  getAllrOrdersHandler,
+  updateOrderStatusHandler,
+} from "../handlers/orderHandler";
 
 const orderRouter = Router();
 
+orderRouter.use(authMiddleware);
 // protected (user)
-orderRouter.get("/", (req: Request, res: Response) => {
-  res.send("all orders of user");
-});
+orderRouter.get("/", asyncHandler(getUserOrdersHandler));
 
 // protected (user)
-orderRouter.post("/", (req: Request, res: Response) => {
-  res.send("create order");
-});
+orderRouter.post("/", asyncHandler(createOrderHandler));
 
 // protected (user)
-orderRouter.delete("/:id", (req: Request, res: Response) => {
-  res.send(" delete  order");
-});
+orderRouter.delete("/:id", asyncHandler(deleteOrderHandler));
+
+orderRouter.use(isAdmin);
 
 // protected (admin)
-orderRouter.put("/:id", (req: Request, res: Response) => {
-  res.send("edit status route");
-});
+orderRouter.get("/all", asyncHandler(getAllrOrdersHandler));
+
+orderRouter.put("/:id", asyncHandler(updateOrderStatusHandler));
 
 export default orderRouter;

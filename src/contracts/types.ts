@@ -18,8 +18,8 @@ export interface Order {
   product_id: string;
   user_id: string;
   quantity: number;
-  status: string;
 }
+export type OrderWithStatus = Order & { status: string };
 
 type withError<T> = T & { error: string };
 export type expressHandler<Params, Req, Res> = RequestHandler<

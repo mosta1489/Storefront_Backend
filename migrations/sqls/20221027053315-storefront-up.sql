@@ -19,7 +19,7 @@ CREATE TABLE orders (
     product_id VARCHAR(150),
     user_id VARCHAR(150),
     quantity integer,
-    status VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'active',
     FOREIGN KEY(product_id) REFERENCES products(id),
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
