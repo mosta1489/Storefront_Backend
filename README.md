@@ -104,6 +104,18 @@
     (put) localhost:3000/oreder/:id <adminToken required>
     (get) localhost:3000/oreder/all <adminToken required>
 
+#### create file named .env and copy this environment variables to it to test project
+    DB_HOST=localhost
+    DB_NAME=storefront
+    TEST_DB_NAME=storefront_test
+    DB_USER=postgres
+    DB_PASSWORD=postgres
+    JWT_SECRET= ajksgfjaslkgjlaijglajweogijoiejwo
+    PORT=3000
+    ENV=dev
+    ADMIN_SECRET=SECRET_PASSWORD
+    SALT_ROUND=10
+
 #
 
 # https://documenter.getpostman.com/view/18849836/2s8YRcPGhm
