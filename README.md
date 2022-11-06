@@ -4,6 +4,16 @@
 
     npm i
 
+#### please create in your local machine two databases
+
+    1- storefront
+    1- storefront-test
+
+#### data base must run at
+
+    host: localhost
+    port: 5432
+
 #### to build database schema
 
     npm run migrate
@@ -19,6 +29,39 @@
 #### server is running at
 
     localhost:3000
+
+## Schema:
+
+**Users**:
+| Column | Type |
+|--------|------|
+| ID | STRING/UUID |
+| Username | STRING |
+| First name | STRING |
+| Last name | STRING |
+| Password | STRING |
+| Isadmin | BOOLEAN |
+
+**Products**:
+| Column | Type |
+|--------|------|
+| ID | STRING/UUID |
+| Name | STRING |
+| Price | INTEGER |
+
+**Orders**:
+| Column | Type |
+|--------|------|
+| ID | STRING/UUID |
+| User_id | foreign key to users(id) |
+| status | STRING |
+
+**Order_products**:
+| Column | Type |
+|--------|------|
+| Order_id | foreign key to users(id) |
+| Product_id | foreign key to users(id) |
+| Quantity | INTEGER |
 
 ## users endpoints
 
@@ -49,9 +92,10 @@
 
 ## orders endpoints
 
-#### user can be create a new order & show his orders & delete an order
+#### user can be create a new order& add product to order & show his orders & delete an order
 
     (post) localhost:3000/oreder/ <userToken required>
+    (post) localhost:3000/addtoorder/ <userToken required>
     (get) localhost:3000/oreder/  <userToken required>
     (delete) localhost:3000/oreder/:id  <userToken required>
 
@@ -65,17 +109,3 @@
 # https://documenter.getpostman.com/view/18849836/2s8YRcPGhm
 
 ## show this Postman API documentation to know all about requests and response shapes
-
-
-
-#### this is the environment variables to test the project
-    DB_HOST=localhost
-    DB_NAME=storefront
-    TEST_DB_NAME=storefront_test
-    DB_USER=postgres
-    DB_PASSWORD=postgres
-    JWT_SECRET= ajksgfjaslkgjlaijglajweogijoiejwo
-    PORT=3000
-    ENV=dev
-    ADMIN_SECRET=SECRET_PASSWORD
-    SALT_ROUND=10

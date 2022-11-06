@@ -15,9 +15,7 @@ export interface Product {
 
 export interface Order {
   id: string;
-  product_id: string;
   user_id: string;
-  quantity: number;
 }
 export type OrderWithStatus = Order & { status: string };
 

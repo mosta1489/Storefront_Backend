@@ -5,9 +5,9 @@
   "main": "server.ts",
   "scripts": {
     "start": "SET ENV=dev& npx tsc & node ./build/server.js",
-    "test": "SET ENV=test& db-migrate --env test up && npx tsc & node node_modules/jasmine/bin/jasmine & db-migrate --env test down ",
+    "test": "SET ENV=dev& npx tsc & node node_modules/jasmine/bin/jasmine ",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "migrate": "db-migrate up"
+    "migrate": "db-migrate up & db-migrate --env test up "
   },
   "author": "Udacity",
   "license": "ISC",

@@ -68,11 +68,18 @@ describe("Order model tests \n", () => {
   it("Create new order to user", async () => {
     const order: Order = {
       id: "order_id_1",
-      product_id: "product_id_1",
       user_id: "user_id_1",
-      quantity: 50,
     };
     await OrderModel.createOrder(order).catch((err) => {
+      console.log(err);
+    });
+  });
+
+  it("Add product to order", async () => {
+    const order_id = "order_id_1";
+    const product_id = "product_id_1";
+    const quantity = 50;
+    await OrderModel.addToOrder(order_id, product_id, quantity).catch((err) => {
       console.log(err);
     });
   });
@@ -88,9 +95,7 @@ describe("Order model tests \n", () => {
     );
     expect(orders[0]).toEqual({
       id: "order_id_1",
-      product_id: "product_id_1",
       user_id: "user_id_1",
-      quantity: 50,
       status: "active",
     });
   });
@@ -107,9 +112,7 @@ describe("Order model tests \n", () => {
     );
     expect(orders[0]).toEqual({
       id: "order_id_1",
-      product_id: "product_id_1",
       user_id: "user_id_1",
-      quantity: 50,
       status: "complete",
     });
   });

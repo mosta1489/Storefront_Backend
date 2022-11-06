@@ -10,6 +10,8 @@ import {
   GetAllOrdersResponse,
   UpdateOrderParams,
   UpdateOrderResponse,
+  AddToOrderRequest,
+  AddToOrderResponse,
 } from "../contracts/api";
 
 export const getUserOrdersHandler: expressHandler<
@@ -29,10 +31,19 @@ export const createOrderHandler: expressHandler<
 > = async (req, res) => {
   const id = crypto.randomUUID();
   const user_id = res.locals.userId;
-  const { product_id, quantity } = req.body;
-  const order: Order = { id, product_id, user_id, quantity };
+  const order: Order = { id, user_id };
   await OrderModel.createOrder(order);
   return res.status(200).send({ message: "Order created successfully" });
+};
+
+export const addToOrderHandler: expressHandler<
+  never,
+  AddToOrderRequest,
+  AddToOrderResponse
+> = async (req, res) => {
+  const { orderId, productId, quantity } = req.body;
+  await OrderModel.addToOrder(orderId, productId, quantity);
+  return res.status(200).send({ message: "Product added successfully" });
 };
 
 export const deleteOrderHandler: expressHandler<

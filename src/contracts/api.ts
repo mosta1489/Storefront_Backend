@@ -81,8 +81,19 @@ export interface GetUserOrdersResponse {
 
 // -----------------------------------------
 
-export type CreateOrderRequest = Pick<Order, "product_id" | "quantity">;
+export type CreateOrderRequest = {};
 export interface CreateOrderResponse {
+  message: string;
+}
+
+// -----------------------------------------
+
+export interface AddToOrderRequest {
+  orderId: string;
+  productId: string;
+  quantity: number;
+}
+export interface AddToOrderResponse {
   message: string;
 }
 

@@ -7,6 +7,7 @@ import {
   deleteOrderHandler,
   getAllrOrdersHandler,
   updateOrderStatusHandler,
+  addToOrderHandler,
 } from "../handlers/orderHandler";
 
 const orderRouter = Router();
@@ -16,6 +17,8 @@ orderRouter.use(authMiddleware);
 orderRouter.get("/", asyncHandler(getUserOrdersHandler));
 
 orderRouter.post("/", asyncHandler(createOrderHandler));
+
+orderRouter.post("/addtoorder", asyncHandler(addToOrderHandler));
 
 orderRouter.delete("/:id", asyncHandler(deleteOrderHandler));
 

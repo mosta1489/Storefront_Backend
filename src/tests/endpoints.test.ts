@@ -87,15 +87,7 @@ describe("Product API tests", () => {
 
 describe("Orders API tests", () => {
   it("Create new order using user token", async () => {
-    const body = {
-      product_id: product_id,
-      quantity: 5,
-    };
-    await request
-      .post("/order/")
-      .send(body)
-      .set("authorization", jwt_user)
-      .expect(200);
+    await request.post("/order/").set("authorization", jwt_user).expect(200);
   });
 
   it("Get user orders using user token", async () => {
@@ -106,6 +98,19 @@ describe("Orders API tests", () => {
     order_id = response.body.orders[0].id;
   });
 
+  it("Add product to order", async () => {
+    const body = {
+      orderId: order_id,
+      productId: product_id,
+      quantity: 5,
+    };
+    await request
+      .post("/order/addtoorder/")
+      .send(body)
+      .set("authorization", jwt_user)
+      .expect(200);
+  });
+
   it("Get all orders using admin token", async () => {
     await request.get("/order/all").set("authorization", jwt_admin).expect(200);
   });
@@ -114,13 +119,6 @@ describe("Orders API tests", () => {
     await request
       .put(`/order/${order_id}`)
       .set("authorization", jwt_admin)
-      .expect(200);
-  });
-
-  it(" Delete order usering user token ", async () => {
-    await request
-      .delete(`/order/${order_id}`)
-      .set("authorization", jwt_user)
       .expect(200);
   });
 });

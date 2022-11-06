@@ -16,9 +16,22 @@ export class OrderModelDB {
     Object.entries(order).forEach(([_, value]) => {
       newOrder.push(value);
     });
-    const query = `INSERT INTO orders (id, product_id, user_id, quantity) VALUES($1,$2,$3,$4)`;
+    const query = `INSERT INTO orders (id, user_id) VALUES($1,$2)`;
     try {
       await DB.query(query, newOrder);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  async addToOrder(
+    orderId: string,
+    productId: string,
+    quantity: number
+  ): Promise<void> {
+    const query = `INSERT INTO order_products (order_id, product_id, quantity) VALUES($1,$2,$3)`;
+    try {
+      await DB.query(query, [orderId, productId, quantity]);
     } catch (error) {
       return Promise.reject(error);
     }
