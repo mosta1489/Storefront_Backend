@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "start": "SET ENV=dev& npx tsc & node ./build/server.js",
-    "test": "SET ENV=dev& npx tsc & node node_modules/jasmine/bin/jasmine ",
+    "test": "SET ENV=test& npx tsc & node node_modules/jasmine/bin/jasmine ",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "migrate": "db-migrate up & db-migrate --env test up "
   },

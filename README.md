@@ -9,6 +9,12 @@
     1- storefront
     1- storefront-test
 
+#### you can use PgAdmin to create these DBs
+
+    - right click on databases and select create database
+    - write storefront in name of database
+    - then click on save button
+
 #### data base must run at
 
     host: localhost
