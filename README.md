@@ -5,17 +5,14 @@
     npm i
 
 #### please create in your local machine two databases
+    - Open the SQL Shell
+    - CREATE USER postgres WITH PASSWORD 'postgres';
+    - CREATE DATABASE storefront;
+    - CREATE DATABASE storefront-test;
+    - GRANT ALL PRIVILEGES ON DATABASE storefront TO postgres
+    - GRANT ALL PRIVILEGES ON DATABASE storefront-test TO postgres
 
-    1- storefront
-    1- storefront-test
-
-#### you can use PgAdmin to create these DBs
-
-    - right click on databases and select create database
-    - write storefront in name of database
-    - then click on save button
-
-#### data base must run at
+#### databases must run on
 
     host: localhost
     port: 5432
